@@ -81,6 +81,11 @@ ColorA groupToColorPropeller(int group)
 	return (ColorA) {1.0f, 1.0f, 0.0f, 1.0f};
 }
 
+ColorA groupToColorText(int group)
+{
+	return (ColorA) { 1.0f, 1.0f, 1.0f, 1.0f };
+}
+
 void DrawAxis() {
 	glPushMatrix();
 	glScalef(5.0, 5.0, 5.0);
@@ -102,22 +107,24 @@ void DrawAxis() {
 
 void DrawGrid(bool showWireFrame)
 {
+	int gridSize = 200;
+	int cellSize = 4;
 	glColor4f(0.5, 0.5, 1.0, 1.0);
 	if (showWireFrame) {
 		glBegin(GL_LINES);
-		for (int i = -50; i <= 50; i++) {
-			glVertex3f(-50, 0, i);
-			glVertex3f(50, 0, i);
-			glVertex3f(i, 0, -50);
-			glVertex3f(i, 0, 50);
+		for (int i = -gridSize; i <= gridSize; i+=cellSize) {
+			glVertex3f(-gridSize, 0, i);
+			glVertex3f(gridSize, 0, i);
+			glVertex3f(i, 0, -gridSize);
+			glVertex3f(i, 0, gridSize);
 		}
 		glEnd();
 	} else {
 		glBegin(GL_QUADS);
-		glVertex3f(-50, 0, -50);
-		glVertex3f(50, 0, -50);
-		glVertex3f(50, 0, 50);
-		glVertex3f(-50, 0, 50);
+		glVertex3f(-gridSize, 0, -gridSize);
+		glVertex3f(gridSize, 0, -gridSize);
+		glVertex3f(gridSize, 0, gridSize);
+		glVertex3f(-gridSize, 0, gridSize);
 		glEnd();
 	}
 }
@@ -150,7 +157,7 @@ void DrawSeaAndSky(unsigned int skyTexture, unsigned int seaTexture, GLUquadric*
 
 void DrawPlane(Vector3 pos, Model* cessna, Model* propeller, float planeDirectionAngle, float planeTurnAmount, float propellerRotation) {
 	glPushMatrix();
-	glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 40);
+	glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 120);
 	glTranslatef(pos.x, pos.y, pos.z);
 	glRotatef(180 - planeDirectionAngle / PI * 180.0, 0, 1, 0);
 	glRotatef(-planeTurnAmount * 90, 1, 0, 0);

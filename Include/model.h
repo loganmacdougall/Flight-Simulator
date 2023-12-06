@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <freeglut.h>
+#include "consts.h"
 #include "global.h"
 
 typedef struct _Model {

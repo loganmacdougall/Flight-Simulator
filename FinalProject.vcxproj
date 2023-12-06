@@ -166,6 +166,7 @@
     <ClInclude Include="Include\texture.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="Resources\thankForTeachingUs.txt" />
     <Text Include="S:\School Files\3161\FinalProject\Resources\cessna.txt" />
     <Text Include="S:\School Files\3161\FinalProject\Resources\propeller.txt" />
   </ItemGroup>

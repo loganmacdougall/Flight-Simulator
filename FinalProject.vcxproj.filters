@@ -70,6 +70,9 @@
     <Text Include="S:\School Files\3161\FinalProject\Resources\propeller.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="Resources\thankForTeachingUs.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <None Include="S:\School Files\3161\FinalProject\Resources\mount03.ppm">

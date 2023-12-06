@@ -11,13 +11,14 @@
 
 Model *cessna;
 Model *propeller;
+Model *thanksForTeachingUs;
 
 Mountain **mountains;
 
 // current camera position
-Vector3 pos = { 0, 1, 1 };
-float planeSpeed = 0.1;
-float planeDirectionAngle = 0;
+Vector3 pos = { 0, 5, 30 };
+float planeSpeed = 0.05;
+float planeDirectionAngle = 3.0f * PI / 2.0f;
 float planeTurnAmount = 0;
 float propellerRotation = 0;
 int choosenSeed = 0;
@@ -33,12 +34,7 @@ float mouseYPos = 0.5;
 
 unsigned int moutainTexture, skyTexture, seaTexture;
 
-bool showMountains = false;
-bool showMountainTexture = false;
-bool showFog = false;
-bool showSeaAndSky = false;
-bool showWireframe = true;
-bool fullscreen = false;
+bool showMountains, showMountainTexture, showFog, showSeaAndSky, showWireframe = true, fullscreen;
 
 void myDisplay(void)
 {
@@ -47,7 +43,7 @@ void myDisplay(void)
 		pos.y - planeOffset.y,
 		pos.z - (planeOffset.z * cosf(planeDirectionAngle) + planeOffset.x * sinf(planeDirectionAngle))
 	};
-	Vector3 lookAt = { pos.x, pos.y + 1.3, pos.z };
+	Vector3 lookAt = { pos.x, pos.y + 1.1, pos.z };
 	
 	if (showWireframe) glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	else glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
@@ -58,9 +54,7 @@ void myDisplay(void)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glLoadIdentity();
-	gluLookAt(camOffest.x, camOffest.y, camOffest.z,
-		lookAt.x, lookAt.y, lookAt.z,
-		0, 1, 0);
+	gluLookAt(camOffest.x, camOffest.y, camOffest.z, lookAt.x, lookAt.y, lookAt.z, 0, 1, 0);
 	glLightfv(GL_LIGHT0, GL_POSITION, light0Pos.arr);
 
 	printGLError("Error after lights");
@@ -69,12 +63,29 @@ void myDisplay(void)
 
 	printGLError("Error after plane");
 
-	for (int mi = 0; mi < mountainCount; mi++) {
-		glPushMatrix();
-		glTranslatef(mountainPos[mi].x, mountainPos[mi].y, mountainPos[mi].z);
-		glScalef(16.0f, 5.0f, 16.0f);
-		mountain_draw_no_texture(mountains[mi], moutainTexture, showMountainTexture, showFog);
-		glPopMatrix();
+	// Draw thank you text
+	glPushMatrix();
+	glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, textureEmission.arr);
+	glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 70);
+	glTranslatef(-20, 5, -30);
+	glRotatef(90, 1, 0, 0);
+	glScalef(4.0f, 4.0f, 4.0f);
+	model_draw(thanksForTeachingUs);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, V0001.arr);
+	glPopMatrix();
+
+	printGLError("Error after thank you text");
+
+	if (showMountains) {
+		srand(0);
+		for (int mi = 0; mi < mountainCount; mi++) {
+			glPushMatrix();
+			glTranslatef(mountainPos[mi].x, mountainPos[mi].y, mountainPos[mi].z);
+			float rScale = randrange(10.0f, 18.0f);
+			glScalef(rScale * 3, rScale, rScale * 3);
+			mountain_draw_no_texture(mountains[mi], moutainTexture, showMountainTexture, showFog);
+			glPopMatrix();
+		}
 	}
 	
 	printGLError("Error after mountain");
@@ -84,6 +95,7 @@ void myDisplay(void)
 	} else {
 		DrawAxis();
 		DrawGrid(showWireframe);
+		gluSphere(gluNewQuadric(), 0.25, 25, 25);
 	}
 
 	printGLError("Error after grid/sea and sky");
@@ -95,7 +107,7 @@ void myDisplay(void)
 
 void myIdle()
 {
-	propellerRotation = propellerRotation + 21.5;
+	propellerRotation = propellerRotation + 20;
 	planeDirectionAngle += planeTurnAmount * 0.1;
 	pos.z += planeSpeed * sinf(planeDirectionAngle);
 	pos.x += planeSpeed * cosf(planeDirectionAngle);
@@ -180,30 +192,28 @@ void myReshape(int width, int height) {
 		aspect = (float)height / (float)width;
 	}
 
-	gluPerspective(45.0, (double)aspect, 3.0, 2000.0);
+	gluPerspective(45.0, (double)aspect, 2.0, 2000.0);
 	glMatrixMode(GL_MODELVIEW);
 }
 
 void initializeGL(void)
 {
-	//glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientLightIntensity.arr);
 
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
 
-	glLightfv(GL_LIGHT0, GL_POSITION, light0Pos.arr);
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientLightIntensity.arr);
 	glLightfv(GL_LIGHT0, GL_AMBIENT, ambientLightColor.arr );
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuseLightColor.arr );
 	glLightfv(GL_LIGHT0, GL_SPECULAR, specularLightColor.arr);
-	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambientMaterialColor.arr);
-	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, diffuseMaterialColor.arr);
 	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, specularMaterialColor.arr);
 	glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, V0001.arr);
 	
 	glEnable(GL_COLOR_MATERIAL);
 	glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
+
+	glShadeModel(GL_SMOOTH);
+	glFrontFace(GL_CCW);
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -211,10 +221,7 @@ void initializeGL(void)
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glColor3f(1.0, 1.0, 1.0);
 
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluPerspective(45.0, (double)windowWidth / (double)windowHeight, 3.0, 2000.0);
-	glMatrixMode(GL_MODELVIEW);
+	myReshape(windowWidth, windowHeight);
 	
 	glEnable(GL_DEPTH_TEST);
 
@@ -228,7 +235,7 @@ void initializeGL(void)
 	glEnable(GL_FOG);
 	glFogi(GL_FOG_MODE, GL_EXP2);
 	glFogfv(GL_FOG_COLOR, fogColor.arr);
-	glFogf(GL_FOG_DENSITY, 0.008);
+	glFogf(GL_FOG_DENSITY, 0.003);
 	glHint(GL_FOG_HINT, GL_NICEST);
 	glEnable(GL_NORMALIZE);
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
@@ -257,6 +264,7 @@ void main(int argc, char** argv)
 
 	cessna = model_init("Resources/cessna.txt", groupToColorCessna);
 	propeller = model_init("Resources/propeller.txt", groupToColorPropeller);
+	thanksForTeachingUs = model_init("Resources/thankForTeachingUs.txt", groupToColorText);
 
 	moutainTexture = texture_generate("Resources/mount03.bmp");
 	skyTexture = texture_generate("Resources/sky08.bmp");

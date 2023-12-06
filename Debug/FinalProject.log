@@ -1,28 +1,19 @@
-﻿  mountain.c
-E:\Shared Files\School Files\3161\FinalProject\Source\mountain.c(6,1): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-E:\Shared Files\School Files\3161\FinalProject\Source\mountain.c(11,1): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-E:\Shared Files\School Files\3161\FinalProject\Source\mountain.c(22,47): warning C4244: 'function': conversion from 'unsigned int' to 'float', possible loss of data
-E:\Shared Files\School Files\3161\FinalProject\Source\mountain.c(22,1): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-E:\Shared Files\School Files\3161\FinalProject\Source\mountain.c(64,23): warning C4018: '<': signed/unsigned mismatch
-E:\Shared Files\School Files\3161\FinalProject\Source\mountain.c(81,20): warning C4018: '<': signed/unsigned mismatch
-E:\Shared Files\School Files\3161\FinalProject\Source\mountain.c(100,20): warning C4018: '<': signed/unsigned mismatch
-  main.c
-E:\Shared Files\School Files\3161\FinalProject\main.c(19,23): warning C4305: 'initializing': truncation from 'double' to 'float'
-E:\Shared Files\School Files\3161\FinalProject\main.c(72,22): warning C4018: '<': signed/unsigned mismatch
-E:\Shared Files\School Files\3161\FinalProject\main.c(50,1): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-E:\Shared Files\School Files\3161\FinalProject\main.c(98,46): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\Shared Files\School Files\3161\FinalProject\main.c(99,46): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-E:\Shared Files\School Files\3161\FinalProject\main.c(145,33): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\Shared Files\School Files\3161\FinalProject\main.c(149,34): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\Shared Files\School Files\3161\FinalProject\main.c(153,22): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\Shared Files\School Files\3161\FinalProject\main.c(156,22): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\Shared Files\School Files\3161\FinalProject\main.c(163,35): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\Shared Files\School Files\3161\FinalProject\main.c(231,30): warning C4305: 'function': truncation from 'double' to 'GLfloat'
-E:\Shared Files\School Files\3161\FinalProject\main.c(250,21): warning C4113: 'void (__cdecl *)()' differs in parameter lists from 'void (__cdecl *)(void)'
-E:\Shared Files\School Files\3161\FinalProject\main.c(251,29): warning C4113: 'void (__cdecl *)(char)' differs in parameter lists from 'void (__cdecl *)(unsigned char,int,int)'
-E:\Shared Files\School Files\3161\FinalProject\main.c(252,27): warning C4113: 'void (__cdecl *)(unsigned char)' differs in parameter lists from 'void (__cdecl *)(int,int,int)'
-E:\Shared Files\School Files\3161\FinalProject\main.c(266,22): warning C4018: '<': signed/unsigned mismatch
-E:\Shared Files\School Files\3161\FinalProject\main.c(276,22): warning C4018: '<': signed/unsigned mismatch
-E:\Shared Files\School Files\3161\FinalProject\main.c(281,2): warning C4098: 'main': 'void' function returning a value
-  Generating Code...
+﻿  main.c
+E:\Shared Files\School Files\3161\FinalProject\main.c(20,24): warning C4305: 'initializing': truncation from 'double' to 'float'
+E:\Shared Files\School Files\3161\FinalProject\main.c(21,45): warning C4305: 'initializing': truncation from 'double' to 'float'
+E:\Shared Files\School Files\3161\FinalProject\main.c(81,23): warning C4018: '<': signed/unsigned mismatch
+E:\Shared Files\School Files\3161\FinalProject\main.c(46,1): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+E:\Shared Files\School Files\3161\FinalProject\main.c(111,46): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+E:\Shared Files\School Files\3161\FinalProject\main.c(157,33): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+E:\Shared Files\School Files\3161\FinalProject\main.c(161,34): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+E:\Shared Files\School Files\3161\FinalProject\main.c(165,22): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+E:\Shared Files\School Files\3161\FinalProject\main.c(168,22): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+E:\Shared Files\School Files\3161\FinalProject\main.c(175,35): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+E:\Shared Files\School Files\3161\FinalProject\main.c(238,30): warning C4305: 'function': truncation from 'double' to 'GLfloat'
+E:\Shared Files\School Files\3161\FinalProject\main.c(257,21): warning C4113: 'void (__cdecl *)()' differs in parameter lists from 'void (__cdecl *)(void)'
+E:\Shared Files\School Files\3161\FinalProject\main.c(258,29): warning C4113: 'void (__cdecl *)(char)' differs in parameter lists from 'void (__cdecl *)(unsigned char,int,int)'
+E:\Shared Files\School Files\3161\FinalProject\main.c(259,27): warning C4113: 'void (__cdecl *)(unsigned char)' differs in parameter lists from 'void (__cdecl *)(int,int,int)'
+E:\Shared Files\School Files\3161\FinalProject\main.c(274,22): warning C4018: '<': signed/unsigned mismatch
+E:\Shared Files\School Files\3161\FinalProject\main.c(284,22): warning C4018: '<': signed/unsigned mismatch
+E:\Shared Files\School Files\3161\FinalProject\main.c(289,2): warning C4098: 'main': 'void' function returning a value
   FinalProject.vcxproj -> E:\Shared Files\School Files\3161\FinalProject\Debug\FinalProject.exe

@@ -10,6 +10,7 @@
 void printControls();
 ColorA groupToColorCessna(int group);
 ColorA groupToColorPropeller(int group);
+ColorA groupToColorText(int group);
 void DrawAxis();
 void DrawGrid(bool showWireFrame);
 void DrawSeaAndSky(unsigned int skyTexture, unsigned int seaTexture, GLUquadric* skyQuad, GLUquadric* seaQuad, bool showFog);
