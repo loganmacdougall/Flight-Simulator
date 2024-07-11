@@ -7,7 +7,7 @@
 #include "global.h"
 
 typedef struct _Model {
-	Vector3* vertices;
+	Vector4* vertices;
 	Vector3* normals;
 	int** faces;
 	int* verticesInFace;

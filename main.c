@@ -38,10 +38,12 @@ bool showMountains, showMountainTexture, showFog, showSeaAndSky, showWireframe =
 
 void myDisplay(void)
 {
+	float xForward = planeOffset.x * cosf(planeDirectionAngle) - planeOffset.z * sinf(planeDirectionAngle);
+	float zForward = planeOffset.z * cosf(planeDirectionAngle) + planeOffset.x * sinf(planeDirectionAngle);
 	Vector3 camOffest = {
-		pos.x - (planeOffset.x * cosf(planeDirectionAngle) - planeOffset.z * sinf(planeDirectionAngle)),
+		pos.x - xForward,
 		pos.y - planeOffset.y,
-		pos.z - (planeOffset.z * cosf(planeDirectionAngle) + planeOffset.x * sinf(planeDirectionAngle))
+		pos.z - zForward,
 	};
 	Vector3 lookAt = { pos.x, pos.y + 1.1, pos.z };
 	
@@ -206,8 +208,11 @@ void initializeGL(void)
 	glLightfv(GL_LIGHT0, GL_AMBIENT, ambientLightColor.arr );
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuseLightColor.arr );
 	glLightfv(GL_LIGHT0, GL_SPECULAR, specularLightColor.arr);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambientMaterialColor.arr);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, diffuseMaterialColor.arr);
 	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, specularMaterialColor.arr);
 	glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, V0001.arr);
+	glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 70);
 	
 	glEnable(GL_COLOR_MATERIAL);
 	glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);

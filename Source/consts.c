@@ -6,9 +6,11 @@ Vector4 ambientLightIntensity = { 0.3, 0.3, 0.3, 1 };
 Vector4 textureEmission = { 0.5, 0.5, 0.5, 1 };
 
 Vector4 ambientLightColor = { 0.3, 0.3, 0.3, 1 };
-Vector4 diffuseLightColor = { 1, 1, 1, 1 };
-Vector4 specularLightColor = { 1, 1, 1, 1 };
+Vector4 diffuseLightColor = { 0.4, 0.5, 0.2, 1 };
+Vector4 specularLightColor = { 0.8, 0.6, 0.8, 1 };
 
+Vector4 ambientMaterialColor = { 1, 1, 1, 1 };
+Vector4 diffuseMaterialColor = { 1, 1, 1, 1 };
 Vector4 specularMaterialColor = { 1, 1, 1, 1 };
 Vector4 V0001 = { 0, 0, 0, 1 };
 

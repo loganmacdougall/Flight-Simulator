@@ -5,12 +5,13 @@ static char _MODEL_LINE[200];
 void _model_init_vertex(Model* model, FILE* model_file) {
 	if (model->numOfVertices == model->maxNumOfVertices) {
 		model->maxNumOfVertices *= 1.5;
-		model->vertices = realloc(model->vertices, sizeof(Vector3) * model->maxNumOfVertices);
-		model->normals = realloc(model->normals, sizeof(Vector3) * model->maxNumOfVertices);
+		model->vertices = realloc(model->vertices, sizeof(Vector4) * model->maxNumOfVertices);
+		model->normals = realloc(model->normals, sizeof(Vector4) * model->maxNumOfVertices);
 	}
 
-	Vector3* data = &model->vertices[model->numOfVertices];
+	Vector4* data = &model->vertices[model->numOfVertices];
 	fscanf(model_file, "%f %f %f\n", &data->x, &data->y, &data->z);
+	data->w = 1;
 
 	model->numOfVertices++;
 }
@@ -69,9 +70,9 @@ Model* model_init(char* filepath, ColorA (*groupToColorFunc)(int group)) {
 	model->maxNumOfVertices = 10;
 	model->maxNumOfFaces = 10;
 	model->maxNumOfGroups = 10;
-	model->vertices = calloc(sizeof(Vector3), model->maxNumOfVertices);
+	model->vertices = calloc(sizeof(Vector4), model->maxNumOfVertices);
 	model->normals = calloc(sizeof(Vector3), model->maxNumOfVertices);
-	model->faces = calloc(sizeof(Vector3I), model->maxNumOfFaces);
+	model->faces = calloc(sizeof(Vector4I), model->maxNumOfFaces);
 	model->verticesInFace = calloc(sizeof(int), model->maxNumOfFaces);
 	model->groups = calloc(sizeof(int), model->maxNumOfGroups);
 
@@ -116,7 +117,7 @@ void model_draw(Model* model) {
 		for (int fvi = 0; fvi < model->verticesInFace[fi]; fvi++) {
 			int vi = model->faces[fi][fvi] - 1;
 			glNormal3fv(model->normals[vi].arr);
-			glVertex3fv(model->vertices[vi].arr);
+			glVertex4fv(model->vertices[vi].arr);
 		}
 		glEnd();
 	}
